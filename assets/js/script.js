@@ -1,16 +1,16 @@
 var weatherAPIKey = "92ac65368ccc7477640749d69fd94759";
-var searchBar = $("#searchBar");
-var searchBtn = $("#searchBtn");
+var searchBar = $("#search-bar");
+var searchBtn = $("#search-button");
 var lat
 var long
 
-$(searchBtn).on("click", function(){
+$(searchBtn).on("click", function() {
     var city = searchBar.val()
 
     // we'll call all three functions
     getGeolocation(city)
     getWeather()
-
+    console.log(searchBtn.val());
 })
 
 // a function that gets the geolocation
@@ -23,6 +23,9 @@ function getGeolocation(cityName) {
 }
 
 // a function that gets the weather info based of the geo
+function getGeoWeather() {
+    fetch(``)
+}
 
 // a function that does a loop and creates elements to show each day
 // for each day
