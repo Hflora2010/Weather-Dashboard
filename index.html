@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Five Day Weather Dashboard</title>
+</head>
+
+<body>
+    <h1>Weather Dashboard</h1>
+    <h2>Search for a City:</h2>
+    <form id="search-form">
+        <input id="search-bar" type="text" placeholder="San Diego" /><br>
+        <button id="search-button" type="button">Search</button>
+    </form>
+    <ul id="searched-cities-list"></ul>
+
+    <main class="main-container">
+        <h1 id="main-city-name"></h1>
+        <h1 id="main-current-date"></h1>
+        <h2 id="main-icon"></h2>
+        <div id="main-temperature"></div>
+        <div id="main-wind"></div>
+        <div id="main-humidity"></div>
+    </main>
+
+    <section id="five-day-forecast">
+        <h1>Five Day Forecast</h1>
+        <ul id="date"></ul>
+        <li id="icon"></li>
+        <li id="temperature"></li>
+        <li id="wind"></li>
+        <li id="humidity"></li>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
