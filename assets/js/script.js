@@ -22,8 +22,8 @@ function getGeolocation(city) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherAPIKey}&units=imperial`) //imperial is converting to fahrenheit 
     .then(response => response.json())
         .then(data => {data.main.temp
-console.log(data);
-console.log(data.main.temp);
+// console.log(data);
+// console.log(data.main.temp);
         })
 }
 
@@ -31,9 +31,9 @@ console.log(data.main.temp);
 function getGeoWeather() {
     fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherAPIKey}`)
         .then(data => {
-            id = data[1].id
-            temp = data[2].temp
-            windSpeed = data[4].speed
+            // id = data[1].id
+            // temp = data[2].temp
+            // windSpeed = data[4].speed
 
         })
 }
@@ -43,6 +43,9 @@ function getGeoWeather() {
 // get the weather info and paint the page
 
 
+// dayjs().calander(null,  {
+//     nextDay: "[Tomorrow]"
+// })
 
 //showing the list of saved cities
 // for (let i = 0; i < scores.length; i++) {
