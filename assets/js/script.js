@@ -8,6 +8,7 @@ var cityName;
 var id;
 var temp;
 var windSpeed;
+var humidity;
 
 $(searchBtn).on("click", function() {
     var city = searchBar.val()
@@ -35,12 +36,14 @@ function getGeolocation(city) {
 function getGeoWeather(lat,lon) {
     fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherAPIKey}`)
     .then(response => response.json())  
-        .then(data => {console.log(data)        
+        .then(data => {console.log(data)
+            currentWeather();        
         })
 }
 
 function currentWeather (data) {
     var cityName = data.name;
+    console.log(cityName);
     var id = new Date(data.dt * 1000);
     var weatherPic = data.weather[0].icon;
     var weatherPicURL = `https://openweathermap.org/img/wn/${weatherPic}.png`;
@@ -49,7 +52,8 @@ function currentWeather (data) {
     var WindSpeed = data.wind.speed;
 }
 
-console.log(currentWeather);
+
+
 
 
 
