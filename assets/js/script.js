@@ -63,10 +63,12 @@ function currentWeather (data) {
     console.log(humidity); 
     var windSpeed = data.list[0].wind.speed;
     console.log(windSpeed);
-}
 
-function ShowCurrentWeather() {
-document.getElementById ("main-city-name-date-icon") = cityName + date + <img src= "iconURL"
+    document.getElementById ("main-city-name-date").innerHTML = cityName + " " + date;
+    document.getElementById ("icon").src = iconURL;
+    document.getElementById ("current-temp").innerHTML = "Temperature: " + temp;
+    document.getElementById ("current-wind-speed").innerHTML = "Wind Speed: " + windSpeed + " m/s";
+    document.getElementById ("current-humidity").innerHTML = "Humidity: " + humidity + "%";
 }
 
 

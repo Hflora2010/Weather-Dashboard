@@ -5,26 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Five Day Weather Dashboard</title>
 </head>
 
 <body>
-    <h1>Weather Dashboard</h1>
-    <h2>Search for a City:</h2>
+    <nav>Weather Dashboard</nav>
     <form id="search-form">
+        <h2>Search for a City:</h2>
         <input id="search-bar" type="text" placeholder="San Diego" /><br>
         <button id="search-button" type="button">Search</button>
+        <ul id="searched-cities-list"></ul>
     </form>
-    <ul id="searched-cities-list"></ul>
-
-    <main class="main-weather-container">
-        <h1 id="main-city-name-date-icon"></h1>
-        <ul id="current-weather-info">
-            <li id="current-temp">Temperature:</li>
-            <li id="current-wind-speed">Wind Speed:</li>
-            <li id="current-humidity">Humidity:</li>
-        </ul>
-    </main>
+ 
+        <main class="main-weather-container">
+            <h1 id="main-city-name-date"></h1><img id="icon" src=" "><br>
+            <div id="current-weather-info">
+                <p id="current-temp"></p>
+                <p id="current-wind-speed"></p>
+                <p id="current-humidity"></p>
+            </div>
+        </main>
 
     <section id="five-day-forecast-container">
         <h1>Five Day Forecast</h1>
