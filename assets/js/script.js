@@ -1,12 +1,18 @@
 var weatherAPIKey = "92ac65368ccc7477640749d69fd94759";
 var searchBar = $("#search-bar");
 var searchBtn = $("#search-button");
+var currentWeatherEl = document.getElementById ("main-city-name-date-icon");
+var currentWeatherInfoEl = document.getElementById("current-weather-info")
+var currentTempEl = document.getElementById ("current-temp");
+var currentWindSpeedEl = document.getElementById("current-wind-speed");
+var currentHumidityEl = document.getElementById("current-humidity");
 
 var lat;
 var long;
 var cityName;
 var date;
 var icon;
+var iconURL;
 var temp;
 var windSpeed;
 var humidity;
@@ -58,6 +64,13 @@ function currentWeather (data) {
     var windSpeed = data.list[0].wind.speed;
     console.log(windSpeed);
 }
+
+currentWeatherEl.textContent = cityName + date + iconURL;
+innerHTML.appendChild(currentWeatherEl);
+
+
+
+
 
 
 
