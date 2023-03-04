@@ -65,9 +65,9 @@ function currentWeather (data) {
     console.log(windSpeed);
 }
 
-currentWeatherEl.textContent = cityName + date + iconURL;
-innerHTML.appendChild(currentWeatherEl);
-
+function ShowCurrentWeather() {
+document.getElementById ("main-city-name-date-icon") = cityName + date + <img src= "iconURL"
+}
 
 
 
