@@ -4,6 +4,7 @@ var searchBtn = $("#search-button");
 
 var lat;
 var long;
+var cityName;
 var id;
 var temp;
 var windSpeed;
@@ -38,6 +39,17 @@ function getGeoWeather(lat,lon) {
         })
 }
 
+function currentWeather (data) {
+    var cityName = data.name;
+    var id = new Date(data.dt * 1000);
+    var weatherPic = data.weather[0].icon;
+    var weatherPicURL = `https://openweathermap.org/img/wn/${weatherPic}.png`;
+    var temp = data.main.temp;
+    var humidity = data.main.humidity;
+    var WindSpeed = data.wind.speed;
+}
+
+console.log(currentWeather);
 
 
 
