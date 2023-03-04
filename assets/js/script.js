@@ -17,6 +17,11 @@ $(searchBtn).on("click", function() {
     console.log(searchBtn.val());
 })
 
+// 
+searchBtn.on("click", function (event) {
+    event.preventDefault();
+})
+
 // a function that gets the geolocation
 function getGeolocation(city) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherAPIKey}&units=imperial`) //imperial is converting to fahrenheit 
@@ -32,6 +37,8 @@ function getGeoWeather(lat,lon) {
         .then(data => {console.log(data)        
         })
 }
+
+
 
 
 
