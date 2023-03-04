@@ -5,7 +5,8 @@ var searchBtn = $("#search-button");
 var lat;
 var long;
 var cityName;
-var id;
+var date;
+var icon;
 var temp;
 var windSpeed;
 var humidity;
@@ -44,10 +45,10 @@ function getGeoWeather(lat,lon) {
 function currentWeather (data) {
     var cityName = data.city.name;
     // console.log(cityName);
-    var date = new Date(data.dt * 1000).toLocaleDateString("en-US").dayjs().format("D/MM/YYYY");
+    var date = new Date(data.dt * 1000).toLocaleDateString("en-US");
     console.log(date);
-    var weatherPic = data.weather[0].icon;
-    var weatherPicURL = `https://openweathermap.org/img/wn/${weatherPic}.png`;
+    var icon = data.weather[0].icon;
+    var iconURL = `https://openweathermap.org/img/wn/${icon}.png`;
     var temp = data.main.temp;
     // console.log(temp);
     var humidity = data.main.humidity;
