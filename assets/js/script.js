@@ -35,7 +35,7 @@ function getGeolocation(city) {
 
 // a function that gets the weather info based of the geo
 function getGeoWeather(lat,lon) {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherAPIKey}`)
+    fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherAPIKey}&units=imperial`)
     .then(response => response.json())  
         .then(data => {console.log(data)
             currentWeather(data);        
@@ -44,17 +44,19 @@ function getGeoWeather(lat,lon) {
 
 function currentWeather (data) {
     var cityName = data.city.name;
-    // console.log(cityName);
-    var date = new Date(data.dt * 1000).toLocaleDateString("en-US");
+    console.log(cityName);
+    var date = new Date(data.list[0].dt * 1000).toLocaleDateString("en-US"); 
     console.log(date);
-    var icon = data.weather[0].icon;
+    var icon = data.list[0].weather[0].icon;
+    console.log(icon);
     var iconURL = `https://openweathermap.org/img/wn/${icon}.png`;
-    var temp = data.main.temp;
-    // console.log(temp);
-    var humidity = data.main.humidity;
-    // console.log(humidity);
-    var windSpeed = data.wind.speed;
-    // console.log(windSpeed);
+    console.log(iconURL);
+    var temp = data.list[0].main.temp;
+    console.log(temp);
+    var humidity = data.list[0].main.humidity;
+    console.log(humidity); 
+    var windSpeed = data.list[0].wind.speed;
+    console.log(windSpeed);
 }
 
 
