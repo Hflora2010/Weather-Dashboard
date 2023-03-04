@@ -37,19 +37,23 @@ function getGeoWeather(lat,lon) {
     fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherAPIKey}`)
     .then(response => response.json())  
         .then(data => {console.log(data)
-            currentWeather();        
+            currentWeather(data);        
         })
 }
 
 function currentWeather (data) {
-    var cityName = data.name;
-    console.log(cityName);
-    var id = new Date(data.dt * 1000);
+    var cityName = data.city.name;
+    // console.log(cityName);
+    var date = new Date(data.dt * 1000).toLocaleDateString("en-US").dayjs().format("D/MM/YYYY");
+    console.log(date);
     var weatherPic = data.weather[0].icon;
     var weatherPicURL = `https://openweathermap.org/img/wn/${weatherPic}.png`;
     var temp = data.main.temp;
+    // console.log(temp);
     var humidity = data.main.humidity;
-    var WindSpeed = data.wind.speed;
+    // console.log(humidity);
+    var windSpeed = data.wind.speed;
+    // console.log(windSpeed);
 }
 
 
