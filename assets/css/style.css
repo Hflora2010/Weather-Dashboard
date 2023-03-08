@@ -60,3 +60,11 @@ h1 {
     height: 30px;
 }
 
+#searched-cities-list {
+    display: flex;
+    flex-direction: column;
+    margin-right: 40px;
+    justify-content: space-evenly;
+    height: 300px;
+}
+
