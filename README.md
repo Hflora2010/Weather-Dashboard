@@ -13,7 +13,7 @@ To use: <br>
 5. A search history of previously searched cities will display below the seach button, if you would like to check the weather again of a city previously searched.
 <br><br>
 Below is a link to my deployed Five Day Weather Forecast Application: <br>
-<a href="https://hflora2010.github.io/Code-Quiz/">Five Day Weather Forecast Application</a>
+<a href="https://hflora2010.github.io/Weather-Dashboard/">Five Day Weather Forecast Application</a>
 <br>
 <br>
 Below is a screenshot of the website you will access with the link above:
