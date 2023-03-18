@@ -80,7 +80,7 @@ function getGeolocation(city) {
 
 // a function that gets the weather info based of the geo
 function getGeoWeather(lat, lon) {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherAPIKey}&units=imperial`)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherAPIKey}&units=imperial`)
         .then(response => response.json())
         .then(data => {
             console.log(data)
