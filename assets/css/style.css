@@ -2,6 +2,7 @@
 nav {
     display: flex;
     justify-content: center;
+    padding: 4px;
     font-size: 30px;
     background-color: blue;
 }
@@ -34,18 +35,19 @@ h2 {
 }
 
 .main-weather-container {
-    width: 95%;
-    border: 3px solid black;
+    border: 2px solid #bfe0f0;
+    border-radius: 12px;
     padding: 20px;
     margin-top: 20px;
 }
 
-h1 {
-    display: inline-flex;
+h3 {
+    margin-top: 0;
 }
 
 .weather-layout {
     flex-grow: 1;
+    margin-right: 20px;
 }
 
 .page-layout {
@@ -67,4 +69,27 @@ h1 {
     justify-content: space-evenly;
     height: 300px;
 }
+
+#five-day-forecast-container {
+display: flex;
+justify-content: space-between;
+}
+
+.day {
+    padding: 25px;
+    border-radius: 12px;
+    background-color: #bfe0f0
+}
+
+.city-wrapper {
+    display:flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.city-wrapper h1 {
+    margin-bottom: 0;
+}
+
+
 

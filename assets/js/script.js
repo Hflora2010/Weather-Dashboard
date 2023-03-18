@@ -6,8 +6,9 @@ var currentWeatherInfoEl = document.getElementById("current-weather-info")
 var currentTempEl = document.getElementById("current-temp");
 var currentWindSpeedEl = document.getElementById("current-wind-speed");
 var currentHumidityEl = document.getElementById("current-humidity");
-var searchCitiesList = document.getElementById("searched-cities-list")
-const container = document.getElementById("five-day-forecast-container")
+var searchCitiesList = document.getElementById("searched-cities-list");
+const container = document.getElementById("five-day-forecast-container");
+var mainWeather = document.getElementById("main-weather.container");
 
 var searchHistory = [];
 var lat;
@@ -20,22 +21,30 @@ var temp;
 var windSpeed;
 var humidity;
 
-$(searchBtn).on("click", function () {
-    var city = searchBar.val()
-    getGeolocation(city);
-    console.log(searchBtn.val());
+// $(searchBtn).on("click", function () {
+   
 
-})
+// })
 
-$(searchBtn).on("click", function () {
+// $(searchBtn).on("click", function () {
+//     var city = searchBar.val();
+    
+// })
+
+$(searchBtn).on("click", function (event) {
+    event.preventDefault();
+    mainWeather.setAttribute('style', 'display: visible');
     var city = searchBar.val();
+    console.log(city);
+    if(city == ""){
+        return false;
+    }
+    getGeolocation(city);
+    // console.log(searchBtn.val());
     searchHistory.push(city);
     localStorage.setItem("city", JSON.stringify(searchHistory));
 })
 
-searchBtn.on("click", function (event) {
-    event.preventDefault();
-})
 
 
 // The following function renders items in a search history list as <li> elements
@@ -55,23 +64,22 @@ function renderSearchHistory() {
             button.setAttribute('type', 'button')
             // button.setAttribute('aria-controls', 'today forecast')
             // button.classList.add('class1', 'class2')
-            button.setAttribute('random', searchHistory[i])
-            button.textContent = searchHistory[i]
+            button.setAttribute('city', searchHistorycity)
             // appnd
             // end tutor code
             button.textContent = searchHistorycity;
             button.setAttribute("data-index", i);
-            button.addEventListener('click', whatev)
+            button.addEventListener('click', getSearchHistoryWeather)
             searchCitiesList.appendChild(button);
         }
     }
 }
 renderSearchHistory();
 
-function whatev(e) {
+function getSearchHistoryWeather(event) {
     container.innerHTML = ""
-    var button = e.target
-    var search = button.getAttribute('random')
+    var button = event.target
+    var search = button.getAttribute('city')
     getGeolocation(search)
 }
 
@@ -119,10 +127,9 @@ function currentWeather(data) {
     document.getElementById("current-humidity").innerHTML = "Humidity: " + humidity + "%";
 }
 
-
 function retrieveFiveDayForecast(data) {
     var cityName = data.city.name;
-    console.log(data)
+    // console.log(data)
     var date = data.list.dt_txt;
     // let date2 = dayjs(date).format('MM/DD/YYYY')
     var icon = data.list[0].weather[0].icon;
@@ -131,30 +138,44 @@ function retrieveFiveDayForecast(data) {
     var humidity = data.list[0].main.humidity;
     var windSpeed = data.list[0].wind.speed;
 
-    // var startFiveDayForecast = dayjs().add(1, 'day').startOf('day').unix();
-    // var endFiveDayForecast = dayjs().add(6, 'day').startOf('day').unix();
-    // // console.log(startFiveDayForecast , endFiveDayForecast);
+    var startFiveDayForecast = dayjs().add(1, 'day').startOf('day').unix();
+    var endFiveDayForecast = dayjs().add(6, 'day').startOf('day').unix();
+    console.log(startFiveDayForecast , endFiveDayForecast);
 
-            container.innerHTML = ""
+    container.innerHTML = "";
+    console.log(data);
 
-            data.list.forEach(date => {
-                if (date.dt_txt.includes("12:00:00")) {
+    // data.list.forEach((day) => {
+
+    //     day.weather.forEach((el) => {
+    //         console.log(el.icon);
+    //         var icon = el.icon;
+
+
+            data.list.forEach(day => {
+                if (day.dt_txt.includes("12:00:00")) {
+                    let wrapper = document.createElement("div");
+                    $(wrapper).addClass("day");
                     let dateEl = document.createElement("h3");
-                    container.append(dateEl);
-                    dateEl.textContent = new Date(date.dt * 1000).toLocaleDateString("en-US");
+                    wrapper.append(dateEl);
+                    dateEl.textContent = new Date(day.dt * 1000).toLocaleDateString("en-US"
+                    );
                     let iconEL = document.createElement("img");
-                    container.append(iconEL);
-                    iconEL.src = `https://openweathermap.org/img/wn/${icon}.png`;
+                    wrapper.append(iconEL);
+                    iconEL.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
                     let div = document.createElement("div");
-                    container.append(div);
+                    wrapper.append(div);
                     let temp = document.createElement("p");
                     div.append(temp);
-                    temp.textContent = "Temperature: " + data.list[0].main.temp + "°";
+                    temp.textContent = "Temperature: " + day.main.temp + "°";
                     let windSpeed = document.createElement("p");
                     div.append(windSpeed);
-                    windSpeed.textContent = "Wind Speed: " + data.list[0].wind.speed + "m/h";
+                    windSpeed.textContent = "Wind Speed: " + day.wind.speed + "m/h";
                     let humidity = document.createElement("p");
                     div.append(humidity)
-                    humidity.textContent = "Humidity: " + data.list[0].main.humidity + "%";
-                }}
-            )};
+                    humidity.textContent = "Humidity: " + day.main.humidity + "%";
+                    container.append(wrapper);
+                }
+            });
+            console.log(icon);
+        }
