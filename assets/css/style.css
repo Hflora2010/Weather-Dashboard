@@ -5,6 +5,7 @@ nav {
     padding: 4px;
     font-size: 30px;
     background-color: blue;
+    color: white;
 }
 
 form {
@@ -39,6 +40,7 @@ h2 {
     border-radius: 12px;
     padding: 20px;
     margin-top: 20px;
+    background-color: #bfe0f0;
 }
 
 h3 {
@@ -56,6 +58,7 @@ h3 {
 
 #search-bar {
     height: 30px;
+    border: 2px solid black;
 }
 
 #search-button {
@@ -91,5 +94,10 @@ justify-content: space-between;
     margin-bottom: 0;
 }
 
+button {
+    height: 30px;
+    border-radius: 3px;
+    color: rgb(0, 0, 0);
+}
 
 

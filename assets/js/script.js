@@ -21,19 +21,8 @@ var temp;
 var windSpeed;
 var humidity;
 
-// $(searchBtn).on("click", function () {
-   
-
-// })
-
-// $(searchBtn).on("click", function () {
-//     var city = searchBar.val();
-    
-// })
-
 $(searchBtn).on("click", function (event) {
     event.preventDefault();
-    mainWeather.setAttribute('style', 'display: visible');
     var city = searchBar.val();
     console.log(city);
     if(city == ""){
@@ -47,26 +36,21 @@ $(searchBtn).on("click", function (event) {
 
 
 
-// The following function renders items in a search history list as <li> elements
+// The following function renders items in a search history list as <button> elements
 function renderSearchHistory() {
     // Clear search-history-list element
     searchCitiesList.innerHTML = "";
     searchHistory = JSON.parse(localStorage.getItem("city"));
 
-    // Render a new li for each searched city
+    // Render a new button for each searched city
     if (!searchHistory) {
         searchHistory = [];
     } else {
         for (var i = 0; i < searchHistory.length; i++) {
             var searchHistorycity = searchHistory[i];
             let button = document.createElement("button");
-            // tutor code here
             button.setAttribute('type', 'button')
-            // button.setAttribute('aria-controls', 'today forecast')
-            // button.classList.add('class1', 'class2')
             button.setAttribute('city', searchHistorycity)
-            // appnd
-            // end tutor code
             button.textContent = searchHistorycity;
             button.setAttribute("data-index", i);
             button.addEventListener('click', getSearchHistoryWeather)
@@ -122,16 +106,14 @@ function currentWeather(data) {
 
     document.getElementById("main-city-name-date").innerHTML = cityName + " " + date;
     document.getElementById("icon").src = iconURL;
-    document.getElementById("current-temp").innerHTML = "Temperature: " + temp + "°";
+    document.getElementById("current-temp").innerHTML = "Temperature: " + temp + "°" + "F";
     document.getElementById("current-wind-speed").innerHTML = "Wind Speed: " + windSpeed + " m/s";
     document.getElementById("current-humidity").innerHTML = "Humidity: " + humidity + "%";
 }
 
 function retrieveFiveDayForecast(data) {
     var cityName = data.city.name;
-    // console.log(data)
     var date = data.list.dt_txt;
-    // let date2 = dayjs(date).format('MM/DD/YYYY')
     var icon = data.list[0].weather[0].icon;
     var iconURL = `https://openweathermap.org/img/wn/${icon}.png`;
     var temp = data.list[0].main.temp;
@@ -144,13 +126,6 @@ function retrieveFiveDayForecast(data) {
 
     container.innerHTML = "";
     console.log(data);
-
-    // data.list.forEach((day) => {
-
-    //     day.weather.forEach((el) => {
-    //         console.log(el.icon);
-    //         var icon = el.icon;
-
 
             data.list.forEach(day => {
                 if (day.dt_txt.includes("12:00:00")) {
@@ -167,7 +142,7 @@ function retrieveFiveDayForecast(data) {
                     wrapper.append(div);
                     let temp = document.createElement("p");
                     div.append(temp);
-                    temp.textContent = "Temperature: " + day.main.temp + "°";
+                    temp.textContent = "Temperature: " + day.main.temp + "°" + "F";
                     let windSpeed = document.createElement("p");
                     div.append(windSpeed);
                     windSpeed.textContent = "Wind Speed: " + day.wind.speed + "m/h";
