@@ -18,7 +18,7 @@ Below is a link to my deployed Five Day Weather Forecast Application: <br>
 <br>
 Below is a screenshot of the website you will access with the link above:
 
-![Alt text](./assets/css/images/Screen%20Shot%202023-03-18%20at%2010.21.31%20AM.png "Screen-Shot")
+![Alt text](./assets/css/images/Screen%20Shot%202023-03-18%20at%204.30.56%20PM.png "Screen-Shot")
 
 ## Credits
 
