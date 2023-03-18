@@ -27,6 +27,8 @@ if (lastSearchedCity) {
     getGeolocation(lastSearchedCity);
 }
 
+renderSearchHistory();
+
 $(searchBtn).on("click", function (event) {
     event.preventDefault();
     var city = searchBar.val();
@@ -36,8 +38,6 @@ $(searchBtn).on("click", function (event) {
     }
 
     getGeolocation(city);
-
-
 })
 
 
@@ -46,26 +46,23 @@ $(searchBtn).on("click", function (event) {
 function renderSearchHistory() {
     // Clear search-history-list element
     searchCitiesList.innerHTML = "";
-    searchHistory = JSON.parse(localStorage.getItem("city"));
+
+    searchHistory = JSON.parse(localStorage.getItem("city")) ?? [];
 
     // Render a new button for each searched city
-    if (!searchHistory) {
-        searchHistory = [];
-    } else {
 
-        for (var i = searchHistory.length - 1; i >= 0; i--) {
-            var searchHistorycity = searchHistory[i];
-            let button = document.createElement("button");
-            button.setAttribute('type', 'button')
-            button.setAttribute('city', searchHistorycity)
-            button.textContent = searchHistorycity;
-            button.setAttribute("data-index", i);
-            button.addEventListener('click', getSearchHistoryWeather)
-            searchCitiesList.appendChild(button);
-        }
+    for (var i = searchHistory.length - 1; i >= 0; i--) {
+        var searchHistorycity = searchHistory[i];
+        let button = document.createElement("button");
+        button.setAttribute('type', 'button')
+        button.setAttribute('city', searchHistorycity)
+        button.textContent = searchHistorycity;
+        button.setAttribute("data-index", i);
+        button.addEventListener('click', getSearchHistoryWeather)
+        searchCitiesList.appendChild(button);
     }
+
 }
-renderSearchHistory();
 
 function getSearchHistoryWeather(event) {
     container.innerHTML = ""
@@ -104,6 +101,10 @@ function getGeoWeather(lat, lon) {
             }
 
             localStorage.setItem("city", JSON.stringify(searchHistory));
+
+            renderSearchHistory();
+            
+            searchBar.val(null);
         })
 }
 
