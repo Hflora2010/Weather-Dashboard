@@ -24,7 +24,7 @@ Below is a screenshot of the website you will access with the link above:
 
 Code was built out with the help of: <br> 
 
-Uconn Tutor: Brandon Rose <br>
+Uconn Tutor: Brandon Rose, Janvier Mbilizi <br>
 Personal Tutor: Jacob Rubino <br>
 
 
