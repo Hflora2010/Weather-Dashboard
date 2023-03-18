@@ -15,7 +15,7 @@ console.log("lastSearchedCity", lastSearchedCity);
 
 var lat;
 var long;
-var cityName;
+let cityName;
 var date;
 var icon;
 var iconURL;
@@ -23,7 +23,7 @@ var temp;
 var windSpeed;
 var humidity;
 
-if(lastSearchedCity){
+if (lastSearchedCity) {
     getGeolocation(lastSearchedCity);
 }
 
@@ -31,18 +31,12 @@ $(searchBtn).on("click", function (event) {
     event.preventDefault();
     var city = searchBar.val();
     console.log(city);
-    if(city == ""){
+    if (city == "") {
         return false;
     }
-    getGeolocation(city);
-    if(!searchHistory.includes(city)){
-        searchHistory.push(city);
-    } else{
-        searchHistory = searchHistory.filter(elem => elem !== city);
-        searchHistory.push(city);
-    }
 
-    localStorage.setItem("city", JSON.stringify(searchHistory));
+    getGeolocation(city);
+
 
 })
 
@@ -59,7 +53,7 @@ function renderSearchHistory() {
         searchHistory = [];
     } else {
 
-        for (var i = searchHistory.length - 1 ; i >= 0; i--) {
+        for (var i = searchHistory.length - 1; i >= 0; i--) {
             var searchHistorycity = searchHistory[i];
             let button = document.createElement("button");
             button.setAttribute('type', 'button')
@@ -99,11 +93,22 @@ function getGeoWeather(lat, lon) {
             console.log(data)
             currentWeather(data);
             retrieveFiveDayForecast(data);
+
+            var existingCity = searchHistory.find(c => c.toLowerCase() === data.city.name.toLowerCase());
+
+            if (!existingCity) {
+                searchHistory.push(data.city.name);
+            } else {
+                searchHistory = searchHistory.filter(elem => elem.toLowerCase() !== data.city.name.toLowerCase());
+                searchHistory.push(data.city.name);
+            }
+
+            localStorage.setItem("city", JSON.stringify(searchHistory));
         })
 }
 
 function currentWeather(data) {
-    var cityName = data.city.name;
+    cityName = data.city.name;
     var date = new Date(data.list[0].dt * 1000).toLocaleDateString("en-US");
     let date2 = dayjs(date).format('MM/DD/YYYY')
     var icon = data.list[0].weather[0].icon;
@@ -125,7 +130,7 @@ function currentWeather(data) {
 }
 
 function retrieveFiveDayForecast(data) {
-    var cityName = data.city.name;
+    cityName = data.city.name;
     var date = data.list.dt_txt;
     var icon = data.list[0].weather[0].icon;
     var iconURL = `https://openweathermap.org/img/wn/${icon}.png`;
@@ -135,35 +140,35 @@ function retrieveFiveDayForecast(data) {
 
     var startFiveDayForecast = dayjs().add(1, 'day').startOf('day').unix();
     var endFiveDayForecast = dayjs().add(6, 'day').startOf('day').unix();
-    console.log(startFiveDayForecast , endFiveDayForecast);
+    console.log(startFiveDayForecast, endFiveDayForecast);
 
     container.innerHTML = "";
     console.log(data);
 
-            data.list.forEach(day => {
-                if (day.dt_txt.includes("12:00:00")) {
-                    let wrapper = document.createElement("div");
-                    $(wrapper).addClass("day");
-                    let dateEl = document.createElement("h3");
-                    wrapper.append(dateEl);
-                    dateEl.textContent = new Date(day.dt * 1000).toLocaleDateString("en-US"
-                    );
-                    let iconEL = document.createElement("img");
-                    wrapper.append(iconEL);
-                    iconEL.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
-                    let div = document.createElement("div");
-                    wrapper.append(div);
-                    let temp = document.createElement("p");
-                    div.append(temp);
-                    temp.textContent = "Temperature: " + day.main.temp + "°" + "F";
-                    let windSpeed = document.createElement("p");
-                    div.append(windSpeed);
-                    windSpeed.textContent = "Wind Speed: " + day.wind.speed + "m/h";
-                    let humidity = document.createElement("p");
-                    div.append(humidity)
-                    humidity.textContent = "Humidity: " + day.main.humidity + "%";
-                    container.append(wrapper);
-                }
-            });
-            console.log(icon);
+    data.list.forEach(day => {
+        if (day.dt_txt.includes("12:00:00")) {
+            let wrapper = document.createElement("div");
+            $(wrapper).addClass("day");
+            let dateEl = document.createElement("h3");
+            wrapper.append(dateEl);
+            dateEl.textContent = new Date(day.dt * 1000).toLocaleDateString("en-US"
+            );
+            let iconEL = document.createElement("img");
+            wrapper.append(iconEL);
+            iconEL.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
+            let div = document.createElement("div");
+            wrapper.append(div);
+            let temp = document.createElement("p");
+            div.append(temp);
+            temp.textContent = "Temperature: " + day.main.temp + "°" + "F";
+            let windSpeed = document.createElement("p");
+            div.append(windSpeed);
+            windSpeed.textContent = "Wind Speed: " + day.wind.speed + "m/h";
+            let humidity = document.createElement("p");
+            div.append(humidity)
+            humidity.textContent = "Humidity: " + day.main.humidity + "%";
+            container.append(wrapper);
         }
+    });
+    console.log(icon);
+}
