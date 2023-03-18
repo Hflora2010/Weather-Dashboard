@@ -9,8 +9,10 @@ var currentHumidityEl = document.getElementById("current-humidity");
 var searchCitiesList = document.getElementById("searched-cities-list");
 const container = document.getElementById("five-day-forecast-container");
 var mainWeather = document.getElementById("main-weather.container");
+let searchHistory = JSON.parse(localStorage.getItem('city')) ?? [];
+var lastSearchedCity = searchHistory[searchHistory.length - 1]
+console.log("lastSearchedCity", lastSearchedCity);
 
-var searchHistory = [];
 var lat;
 var long;
 var cityName;
@@ -21,6 +23,10 @@ var temp;
 var windSpeed;
 var humidity;
 
+if(lastSearchedCity){
+    getGeolocation(lastSearchedCity);
+}
+
 $(searchBtn).on("click", function (event) {
     event.preventDefault();
     var city = searchBar.val();
@@ -30,8 +36,15 @@ $(searchBtn).on("click", function (event) {
     }
     getGeolocation(city);
     // console.log(searchBtn.val());
-    searchHistory.push(city);
+    if(!searchHistory.includes(city)){
+        searchHistory.push(city);
+    } else{
+        searchHistory = searchHistory.filter(elem => elem !== city);
+        searchHistory.push(city);
+    }
+
     localStorage.setItem("city", JSON.stringify(searchHistory));
+
 })
 
 
@@ -46,7 +59,18 @@ function renderSearchHistory() {
     if (!searchHistory) {
         searchHistory = [];
     } else {
-        for (var i = 0; i < searchHistory.length; i++) {
+        // for (var i = 0; i < searchHistory.length; i++) {
+        //     var searchHistorycity = searchHistory[i];
+        //     let button = document.createElement("button");
+        //     button.setAttribute('type', 'button')
+        //     button.setAttribute('city', searchHistorycity)
+        //     button.textContent = searchHistorycity;
+        //     button.setAttribute("data-index", i);
+        //     button.addEventListener('click', getSearchHistoryWeather)
+        //     searchCitiesList.appendChild(button);
+        // }
+
+        for (var i = searchHistory.length - 1 ; i >= 0; i--) {
             var searchHistorycity = searchHistory[i];
             let button = document.createElement("button");
             button.setAttribute('type', 'button')
