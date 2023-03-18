@@ -35,7 +35,6 @@ $(searchBtn).on("click", function (event) {
         return false;
     }
     getGeolocation(city);
-    // console.log(searchBtn.val());
     if(!searchHistory.includes(city)){
         searchHistory.push(city);
     } else{
@@ -59,16 +58,6 @@ function renderSearchHistory() {
     if (!searchHistory) {
         searchHistory = [];
     } else {
-        // for (var i = 0; i < searchHistory.length; i++) {
-        //     var searchHistorycity = searchHistory[i];
-        //     let button = document.createElement("button");
-        //     button.setAttribute('type', 'button')
-        //     button.setAttribute('city', searchHistorycity)
-        //     button.textContent = searchHistorycity;
-        //     button.setAttribute("data-index", i);
-        //     button.addEventListener('click', getSearchHistoryWeather)
-        //     searchCitiesList.appendChild(button);
-        // }
 
         for (var i = searchHistory.length - 1 ; i >= 0; i--) {
             var searchHistorycity = searchHistory[i];
